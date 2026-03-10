@@ -1,6 +1,4 @@
 !     Program: Student Test Score Analyzer
-!     Programmer: Hardika Regmi
-!     Date: 03/05/2026
 !     Description: This program reads test scores and prints the list, the average, the highest and lowest scores, and how many pass/fail.
 !     Requirements: Standard Fortran IV compiler
 !     Data:
