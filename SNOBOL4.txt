@@ -1,0 +1,47 @@
+* PROGRAM 3
+
+* This SNOBOL4 program reads lines until END.It breaks each line into tokens using pattern matching.
+* Then it counts total valid words, vowel words,consonant words, and invalid tokens.
+
+ TOTAL = 0
+ VOWEL = 0
+ CONS = 0
+ INVALID = 0
+
+ LETTERS = &LCASE &UCASE
+ VOWELS = 'AEIOUaeiou'
+
+READ LINE = INPUT :F(OUT)
+ IDENT(LINE,'END') :S(OUT)
+
+* gets next token
+LOOP LINE BREAK(' ') . TOKEN SPAN(' ') = :S(PROCESS) F(LAST)
+
+* checks if token is a valid word
+PROCESS TOKEN SPAN(LETTERS) . WORD :F(BAD)
+ EQ(SIZE(TOKEN),SIZE(WORD)) :F(BAD)
+
+ TOTAL = TOTAL + 1
+
+* checks first letter
+ TOKEN LEN(1) . FIRST
+ VOWELS BREAK(FIRST) LEN(1) :S(ISVOWEL) F(ISCONS)
+
+ISVOWEL VOWEL = VOWEL + 1 :(LOOP)
+ISCONS CONS = CONS + 1 :(LOOP)
+
+* count invalid token
+BAD INVALID = INVALID + 1 :(LOOP)
+
+* handles last token in line
+LAST LINE = TRIM(LINE)
+ IDENT(LINE) :S(READ)
+ TOKEN = LINE
+ LINE = ''
+ :(PROCESS)
+
+OUT OUTPUT = 'Total words: ' TOTAL
+ OUTPUT = 'Vowel words: ' VOWEL
+ OUTPUT = 'Consonant words: ' CONS
+ OUTPUT = 'Invalid tokens: ' INVALID
+END
