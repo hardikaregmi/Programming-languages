@@ -1,0 +1,74 @@
+#
+Name: Hardika Regmi
+Course: CSC 408
+Program: Program 4
+Description: This program reads a 5 x 5 matrix of integers, prints the matrix, prints row sums and column sums, and finds the maximum value and its location.
+#
+
+BEGIN
+    [1:5, 1:5] INT matrix;
+    INT rowsum;
+    INT colsum;
+    INT maxvalue;
+    INT maxrow;
+    INT maxcol;
+
+    print(("Enter values for a 5 x 5 matrix", newline));
+
+    # Reads 25 integers into the matrix #
+    FOR i FROM 1 TO 5 DO
+        FOR j FROM 1 TO 5 DO
+            read((matrix[i, j]))
+        OD
+    OD;
+
+    print((newline, "Matrix entered:", newline));
+
+    # Print the matrix in table form #
+    FOR i FROM 1 TO 5 DO
+        FOR j FROM 1 TO 5 DO
+            print((whole(matrix[i, j], 0), " "))
+        OD;
+        print((newline))
+    OD;
+
+    print((newline, "Row sums:", newline));
+
+    # Computes and print each row sum #
+    FOR i FROM 1 TO 5 DO
+        rowsum := 0;
+        FOR j FROM 1 TO 5 DO
+            rowsum +:= matrix[i, j]
+        OD;
+        print(("Row ", whole(i, 0), ": ", whole(rowsum, 0), newline))
+    OD;
+
+    print((newline, "Column sums:", newline));
+
+    # Computes and prints each column sum #
+    FOR j FROM 1 TO 5 DO
+        colsum := 0;
+        FOR i FROM 1 TO 5 DO
+            colsum +:= matrix[i, j]
+        OD;
+        print(("Col ", whole(j, 0), ": ", whole(colsum, 0), newline))
+    OD;
+
+    # Finds the largest value in the matrix #
+    maxvalue := matrix[1, 1];
+    maxrow := 1;
+    maxcol := 1;
+
+    FOR i FROM 1 TO 5 DO
+        FOR j FROM 1 TO 5 DO
+            IF matrix[i, j] > maxvalue THEN
+                maxvalue := matrix[i, j];
+                maxrow := i;
+                maxcol := j
+            FI
+        OD
+    OD;
+
+    print(("Maximum value: ", whole(maxvalue, 0), newline));
+    print(("Location: Row ", whole(maxrow, 0), " Column ", whole(maxcol, 0), newline))
+END
