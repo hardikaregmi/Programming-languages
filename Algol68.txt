@@ -1,6 +1,4 @@
 #
-Name: Hardika Regmi
-Course: CSC 408
 Program: Program 4
 Description: This program reads a 5 x 5 matrix of integers, prints the matrix, prints row sums and column sums, and finds the maximum value and its location.
 #
